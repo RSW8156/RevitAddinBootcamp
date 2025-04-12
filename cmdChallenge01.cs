@@ -44,41 +44,6 @@
                 FilteredElementCollector collector1 = new FilteredElementCollector(doc);
                 collector1.OfClass(typeof(ViewFamilyType));
 
-               //If the number is divisible by 3, create a floor plan and name it "FIZZ_#"
-                if (i % 3 == 0)
-                {
-                    // Create a Floor Plan view
-                    ViewFamilyType floorPlanVFT = null;
-                    foreach (ViewFamilyType curVFT in collector1)
-                    {
-                        if (curVFT.ViewFamily == ViewFamily.FloorPlan)
-                        {
-                            floorPlanVFT = curVFT;
-                        }
-                    }
-
-                    ViewPlan newFloorPlan = ViewPlan.Create(doc, floorPlanVFT.Id, newLevel.Id);
-                    newFloorPlan.Name = "FIZZ_" + i.ToString();
-
-                }
-                //If the number is divisible by 5, create a ceiling plan and name it "BUZZ_#"
-                if (i % 5 == 0)
-                {
-                    // Create a Ceiling Plan view
-                    ViewFamilyType ceilingPlanVFT = null;
-                    foreach (ViewFamilyType curVFT in collector1)
-                    {
-                        if (curVFT.ViewFamily == ViewFamily.CeilingPlan)
-                        {
-                            ceilingPlanVFT = curVFT;
-                        }
-                    }
-
-                    ViewPlan newCeilingPlan = ViewPlan.Create(doc, ceilingPlanVFT.Id, newLevel.Id);
-                    newCeilingPlan.Name = "BUZZ_" + i.ToString();
-                }
-
-
                 //If the number is divisible by both 3 and 5 (15), create a sheet and name it "FIZZBUZZ_#"
                 if (i % 15 == 0)
                 {
@@ -90,7 +55,7 @@
                 // Create a Sheet
                 ViewSheet newSheet = ViewSheet.Create(doc, collector2.FirstElementId());
                 newSheet.Name = "FIZZBUZZ_" + i.ToString();
-                    newSheet.SheetNumber = "RAB_" + i.ToString();
+                newSheet.SheetNumber = "RAB_" + i.ToString();
 
                 // Create a Floor Plan view
                 ViewFamilyType floorPlanVFT = null;
@@ -112,6 +77,42 @@
 
                 Viewport newViewport = Viewport.Create(doc, newSheet.Id, newFloorPlan.Id, insPoint);
                 }
+
+               //If the number is divisible by 3, create a floor plan and name it "FIZZ_#"
+                else if (i % 3 == 0)
+                {
+                    // Create a Floor Plan view
+                    ViewFamilyType floorPlanVFT = null;
+                    foreach (ViewFamilyType curVFT in collector1)
+                    {
+                        if (curVFT.ViewFamily == ViewFamily.FloorPlan)
+                        {
+                            floorPlanVFT = curVFT;
+                        }
+                    }
+
+                    ViewPlan newFloorPlan = ViewPlan.Create(doc, floorPlanVFT.Id, newLevel.Id);
+                    newFloorPlan.Name = "FIZZ_" + i.ToString();
+
+                }
+                //If the number is divisible by 5, create a ceiling plan and name it "BUZZ_#"
+                else if (i % 5 == 0)
+                {
+                    // Create a Ceiling Plan view
+                    ViewFamilyType ceilingPlanVFT = null;
+                    foreach (ViewFamilyType curVFT in collector1)
+                    {
+                        if (curVFT.ViewFamily == ViewFamily.CeilingPlan)
+                        {
+                            ceilingPlanVFT = curVFT;
+                        }
+                    }
+
+                    ViewPlan newCeilingPlan = ViewPlan.Create(doc, ceilingPlanVFT.Id, newLevel.Id);
+                    newCeilingPlan.Name = "BUZZ_" + i.ToString();
+                }
+
+
             }
 
 
